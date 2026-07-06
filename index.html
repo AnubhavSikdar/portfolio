@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anubhav Sikdar | AI & Operations Control Tower</title>
+    <!-- Tailwind v4.0 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;900&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Space Mono', monospace;
+        }
+
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .blueprint-bg {
+            background-color: #F4F0EA;
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            transition: none !important;
+            scroll-behavior: auto !important;
+        }
+
+        /* Availability Module Animations */
+        @keyframes spin-slow {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+
+        @keyframes radar-sweep {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-radar-sweep {
+            animation: radar-sweep 4s linear infinite;
+        }
+
+        @keyframes globe-spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-globe-spin {
+            animation: globe-spin 24s linear infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                box-shadow: 0 0 0 0px rgba(168, 230, 207, 0.5);
+            }
+
+            50% {
+                opacity: 1;
+                box-shadow: 0 0 0 6px rgba(168, 230, 207, 0);
+            }
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+    </style>
+</head>
+
+<body
+    class="blueprint-bg text-black p-4 min-h-screen flex flex-col lg:flex-row gap-5 selection:bg-black selection:text-[#FFE600]">
+
+    <!-- ==================== LEFT CONTROLLER PANEL (FIXED VIEWPORT STACK) ==================== -->
+    <aside
+        class="w-full lg:w-80 flex flex-col bg-[#A8E6CF] border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] shrink-0 lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] overflow-y-auto">
+        <!-- Branding Frame Header -->
+        <div
+            class="border-b-4 border-black p-4 bg-black text-[#FFE600] font-black text-2xl tracking-widest flex items-center justify-between heading-font">
+            <span>&gt; SIKDAR.SYS</span>
+            <span
+                class="bg-[#FFE600] text-black text-xs px-2 py-0.5 font-mono font-bold border border-black">v1.3_PROD</span>
+        </div>
+        <!-- Environment Node Pulse Check -->
+        <div class="border-b-4 border-black bg-white p-3 text-xs font-bold flex justify-between items-center px-4">
+            <span class="tracking-wider">NODE // WSL2_UBUNTU_STACK</span>
+            <span class="text-emerald-700 flex items-center gap-2 font-black">
+                <span class="w-2.5 h-2.5 bg-emerald-500 border border-black rounded-full animate-ping absolute"></span>
+                <span class="w-2.5 h-2.5 bg-emerald-500 border border-black rounded-full relative"></span>
+                SYS_ACTIVE
+            </span>
+        </div>
+
+        <!-- Dashboard Multi-Switchboard Navigation -->
+        <nav class="flex flex-col bg-white border-b-4 border-black">
+            <button data-target="home"
+                class="nav-link w-full text-left block p-3.5 font-black text-xs uppercase border-b-2 border-black bg-black text-white cursor-pointer hover:bg-black/90">
+                [01] EXECUTION_WORKSPACE // HOME
+            </button>
+            <button data-target="leadership"
+                class="nav-link w-full text-left block p-3.5 font-black text-xs uppercase border-b-2 border-black bg-white hover:bg-[#FFE600] cursor-pointer">
+                [02] TECHNICAL_LEADERSHIP
+            </button>
+            <button data-target="deployments"
+                class="nav-link w-full text-left block p-3.5 font-black text-xs uppercase border-b-2 border-black bg-white hover:bg-[#FFE600] cursor-pointer">
+                [03] SYSTEM_DEPLOYMENTS
+            </button>
+            <button data-target="capabilities"
+                class="nav-link w-full text-left block p-3.5 font-black text-xs uppercase border-b-2 border-black bg-white hover:bg-[#FFE600] cursor-pointer">
+                [04] CAPABILITIES_MATRIX
+            </button>
+            <button data-target="validation"
+                class="nav-link w-full text-left block p-3.5 font-black text-xs uppercase bg-white hover:bg-[#FFE600] cursor-pointer">
+                [05] VALIDATION_&_ACADEMICS
+            </button>
+        </nav>
+
+        <!-- Live Metrics Telemetry Modules -->
+        <div class="hidden lg:flex flex-col gap-3 p-4 font-mono text-xs bg-white/60 flex-1">
+            <div class="border-b-2 border-black/20 pb-2">
+                <span class="font-black text-black/50 block uppercase text-[9px]">// EFFICIENCY_INDEX</span>
+                <span class="font-bold text-black text-xs">99.9966% Defect-Free Target</span>
+            </div>
+            <div class="border-b-2 border-black/20 pb-2">
+                <span class="font-black text-black/50 block uppercase text-[9px]">// CORE_ARCHITECTURE</span>
+                <span class="font-bold text-black text-xs">Containerized Multi-Agent Mesh</span>
+            </div>
+
+            <!-- Availability System Dispatch -->
+            <div
+                class="relative overflow-hidden border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] bg-black p-[2.5px] mt-1 select-none">
+                <!-- Rotating Glow Overlay -->
+                <div
+                    class="absolute top-1/2 left-1/2 w-[250%] h-[250%] bg-[conic-gradient(from_0deg,#FFE600,#A8E6CF,#FFB7B2,#FFE600)] animate-spin-slow origin-center z-0">
+                </div>
+
+                <!-- Inner Dashboard Panel -->
+                <div class="relative bg-black text-white p-3 z-10 flex flex-col gap-2.5">
+                    <div class="flex items-center justify-between border-b border-white/20 pb-1.5">
+                        <span class="font-black text-[#FFE600] text-[9px] tracking-widest uppercase">// SYS_DISPATCH:
+                            ACTIVE</span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-[#A8E6CF] animate-pulse-glow"></span>
+                            <span class="text-[#A8E6CF] font-black text-[9px] tracking-wider uppercase">ONLINE</span>
+                        </span>
+                    </div>
+
+                    <div class="flex gap-2.5 items-center">
+                        <!-- Globe Animation Module -->
+                        <div
+                            class="relative w-11 h-11 bg-white/5 border border-white/10 rounded flex items-center justify-center shrink-0 overflow-hidden">
+                            <!-- Radar sweep effect overlay -->
+                            <div
+                                class="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_60%,rgba(168,230,207,0.3)_100%)] animate-radar-sweep pointer-events-none">
+                            </div>
+
+                            <!-- Stylized Cyber Globe SVG -->
+                            <svg class="w-8 h-8 text-[#A8E6CF]/80" viewBox="0 0 100 100" fill="none"
+                                stroke="currentColor" stroke-width="4">
+                                <circle cx="50" cy="50" r="44" stroke-dasharray="8 6"
+                                    class="animate-globe-spin origin-center" />
+                                <line x1="6" y1="50" x2="94" y2="50" stroke-width="2" opacity="0.5" />
+                                <path d="M15 30 Q50 42 85 30" stroke-width="3" opacity="0.7" />
+                                <path d="M15 70 Q50 58 85 70" stroke-width="3" opacity="0.7" />
+                                <path d="M50 6 Q32 50 50 94" stroke-width="3" opacity="0.7" />
+                                <path d="M50 6 Q68 50 50 94" stroke-width="3" opacity="0.7" />
+                                <line x1="50" y1="6" x2="50" y2="94" stroke-width="2" opacity="0.5" />
+                            </svg>
+
+                            <!-- Ping Location Dot -->
+                            <span
+                                class="absolute top-[35%] left-[65%] w-2.5 h-2.5 bg-[#FFE600] rounded-full border border-black flex">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FFE600] opacity-75"></span>
+                            </span>
+                        </div>
+
+                        <!-- Availability Core Copy -->
+                        <div class="flex-1 min-w-0">
+                            <span
+                                class="text-[9px] text-[#FFB7B2] font-black uppercase tracking-wider block leading-none mb-1">//
+                                TALENT_ROUTING</span>
+                            <h4 class="font-black text-xs uppercase text-white leading-tight tracking-tight">OPEN TO
+                                WORK GLOBALLY</h4>
+                            <span class="text-[8px] text-white/70 font-mono block leading-tight mt-0.5">Awaiting
+                                deployment requests.</span>
+                        </div>
+                    </div>
+
+                    <!-- Target Sockets Tags -->
+                    <div class="border-t border-white/20 pt-2 flex flex-col gap-1 text-[9px] font-mono">
+                        <div class="flex items-center justify-between">
+                            <span class="text-white/50">ENGAGEMENT:</span>
+                            <span class="text-white font-bold">CONTRACT / FTE / HYBRID</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white/50">GEOGRAPHY:</span>
+                            <span class="text-[#FFE600] font-black uppercase">WORLDWIDE DEPLOY</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-white/50">TIMEZONES:</span>
+                            <span class="text-[#A8E6CF] font-bold">EST / GMT / IST / CET</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peripheral Real-time Monitor Box -->
+            <div
+                class="mt-auto bg-black text-[#A8E6CF] p-3 border-4 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                <span
+                    class="text-white font-black block border-b border-[#A8E6CF]/30 pb-1 mb-2 text-[10px] tracking-wider">//
+                    RUNTIME_SOCKETS</span>
+                <div class="grid grid-cols-2 gap-y-1 gap-x-2 text-[9px] font-bold">
+                    <div class="flex justify-between border-b border-[#A8E6CF]/10"><span>QDRANT:</span><span
+                            class="text-white">[OK]</span></div>
+                    <div class="flex justify-between border-b border-[#A8E6CF]/10"><span>LIVEKIT:</span><span
+                            class="text-white">[ACT]</span></div>
+                    <div class="flex justify-between border-b border-[#A8E6CF]/10"><span>N8N_ENV:</span><span
+                            class="text-white">[RUN]</span></div>
+                    <div class="flex justify-between border-b border-[#A8E6CF]/10"><span>DIFY:</span><span
+                            class="text-white">[STB]</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Dynamic System Time Tracker -->
+        <div class="p-4 bg-black text-white text-xs font-bold font-mono tracking-wider border-t-4 border-black text-center"
+            id="sys-clock">
+            CLOCK: CONFIGURING_DATA_PIPELINES...
+        </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT TIMELINE STREAM (SCROLLABLE CANVAS) ==================== -->
+    <main class="flex-1 flex flex-col gap-8 overflow-y-visible">
+
+        <!-- SYSTEM NODE 01: IDENTITY & CORE BIO OBJECTIVE -->
+        <section id="section-home"
+            class="bg-[#FFE600] border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <div
+                class="bg-black text-white px-4 py-2 flex justify-between items-center font-mono text-xs font-bold border-b-4 border-black">
+                <span>// MAIN_IDENTITY_MODULE.EXE</span>
+                <div class="flex gap-1.5">
+                    <span class="w-2.5 h-2.5 bg-white border border-black inline-block"></span>
+                    <span class="w-2.5 h-2.5 bg-black border border-white inline-block"></span>
+                </div>
+            </div>
+
+            <div class="p-6 flex flex-col md:flex-row gap-6 items-start">
+                <!-- Profile Frame Box -->
+                <div
+                    class="w-88 h-104 bg-white border-16 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] shrink-0 flex items-center justify-center relative overflow-hidden bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:8px_8px]">
+                    <div
+                        class="absolute inset-0 flex flex-col items-center justify-center font-bold text-xs bg-white p-2 text-center">
+                        <img src="img/Anubhav Sikdar.jpeg" alt="Anubhav Sikdar" class="profile-frame">
+                    </div>
+                </div>
+
+                <!-- Identity Summary Meta -->
+                <div class="flex-1 w-full">
+                    <div
+                        class="inline-block bg-black text-[#FFE600] px-3 py-1 font-black text-[11px] uppercase tracking-wider mb-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                        Agentic AI Developer & Operational Engineering Specialist
+                    </div>
+                    <h1
+                        class="heading-font text-4xl md:text-5xl lg:text-6xl font-black uppercase text-black mb-3 tracking-tight leading-none">
+                        Anubhav Sikdar
+                    </h1>
+
+                    <!-- Rapid System Badges -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span
+                            class="bg-white text-black border-2 border-black font-black text-xs px-2.5 py-0.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">[
+                            CTO // MULTI-AGENT ARCHITECT ]</span>
+                        <span
+                            class="bg-white text-black border-2 border-black font-black text-xs px-2.5 py-0.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">[
+                            LEAN SIX SIGMA BLACK BELT ]</span>
+                        <span
+                            class="bg-white text-black border-2 border-black font-black text-xs px-2.5 py-0.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">[
+                            BUSINESS ANALYST WITH GEN AND AGENTIC AI ]</span>
+                        <span
+                            class="bg-white text-black border-2 border-black font-black text-xs px-2.5 py-0.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">[
+                            1ST DIV SANGEET PRABHAKAR ]</span>
+                    </div>
+
+                    <p
+                        class="font-sans font-bold text-sm md:text-base text-black max-w-4xl leading-relaxed mb-5 bg-white border-4 border-black p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        Forward-thinking Agentic AI & Operations Specialist with a unique blend of financial acumen and
+                        technical leadership. Expert at engineering containerized automation pipelines and applying Lean
+                        Six Sigma methodologies to reduce human dependency and drive enterprise workflows toward peak
+                        precision.
+                    </p>
+
+                    <!-- Contact Sockets Terminal Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-4 font-mono text-xs">
+                        <div
+                            class="bg-white text-black border-2 border-black p-2 font-bold flex items-center justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span>EMAIL:</span> <span class="underline select-all">anubhavsikdar.ai@gmail.com</span>
+                        </div>
+                        <div
+                            class="bg-white text-black border-2 border-black p-2 font-bold flex items-center justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span>PHONE:</span> <span class="select-all">+91 9997197969</span>
+                        </div>
+                        <div
+                            class="bg-white text-black border-2 border-black p-2 font-bold flex items-center justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span>LOCATION:</span> <span class="select-all">AGRA, UTTAR PRADESH, INDIA</span>
+                        </div>
+                        <div
+                            class="bg-white text-black border-2 border-black p-2 font-bold flex items-center justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span>LINKEDIN:</span>
+                            <a href="https://www.linkedin.com/in/anubhav-sikdar/" target="_blank"
+                                class="inline-flex items-center gap-1 font-bold text-black hover:text-blue-600 cursor-pointer px-1">
+                                profile core
+                                <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Trigger Elements -->
+                    <div class="flex flex-wrap gap-3">
+                        <button id="btn-engage"
+                            class="bg-black text-white font-black text-xs uppercase px-5 py-3.5 border-4 border-black hover:bg-white hover:text-black shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,0)] cursor-pointer">
+                            INITIATE SYSTEM ENGAGEMENT
+                        </button>
+                        <button id="btn-arch"
+                            class="bg-white text-black font-black text-xs uppercase px-5 py-3.5 border-4 border-black hover:bg-[#FFB7B2] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-[4px] active:translate-y-[4px] active:shadow-[0px_0px_0px_0px_rgba(0,0,0,0)] cursor-pointer">
+                            DIAGNOSTIC SYSTEM TOPOLOGY
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEM NODE 02: TECHNICAL LEADERSHIP RECONSTRUCTION -->
+        <section id="section-leadership" class="flex flex-col gap-4">
+            <h2
+                class="heading-font text-xl font-black uppercase bg-black text-white px-4 py-2 inline-block self-start tracking-tight border-4 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                // TECHNICAL_LEADERSHIP_LOGS
+            </h2>
+
+            <div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
+                <!-- Primary Active CTO Deployment -->
+                <div
+                    class="xl:col-span-3 bg-white border-4 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+                    <div
+                        class="bg-black text-white font-mono text-xs px-4 py-2 border-b-4 border-black font-bold flex justify-between items-center">
+                        <span class="text-[#FFE600]">ROLE: CHIEF TECHNOLOGY OFFICER (CTO) & AI AUTOMATION LEAD</span>
+                        <span class="bg-red-600 px-2 py-0.5 text-[10px] text-white">04/2024 - PRESENT</span>
+                    </div>
+                    <div
+                        class="bg-neutral-900 text-white font-mono text-xs px-4 py-1 border-b-2 border-black font-bold">
+                        ORGANIZATION: CRAFTTREE // LOCATION: AGRA, INDIA
+                    </div>
+                    <div class="p-5 flex flex-col gap-3 font-sans text-sm font-bold text-neutral-800">
+                        <div class="flex gap-2 items-start">
+                            <span class="text-black font-black font-mono mt-0.5 shrink-0">&gt;</span>
+                            <p>Directed end-to-end technical strategy and operational architecture, leading
+                                cross-functional teams to build robust infrastructure using n8n, Docker, and Python.</p>
+                        </div>
+                        <div class="flex gap-2 items-start">
+                            <span class="text-black font-black font-mono mt-0.5 shrink-0">&gt;</span>
+                            <p>Spearheaded Lean Six Sigma operations and workflow audits to eliminate service delivery
+                                bottlenecks, establishing an operational ideology focused on minimizing human
+                                dependency.</p>
+                        </div>
+                        <div class="flex gap-2 items-start">
+                            <span class="text-black font-black font-mono mt-0.5 shrink-0">&gt;</span>
+                            <p>Designed and optimized high-performance enterprise pipelines, driving process accuracy
+                                toward the Six Sigma standard of 99.9966% defect-free efficiency.</p>
+                        </div>
+                        <div class="flex gap-2 items-start">
+                            <span class="text-black font-black font-mono mt-0.5 shrink-0">&gt;</span>
+                            <p>Translated complex business requirements into high-performance system designs, building
+                                data-driven dashboards using Tableau, Power BI, Minitab, and Appsmith to track real-time
+                                operational metrics.</p>
+                        </div>
+                        <div class="flex gap-2 items-start">
+                            <span class="text-black font-black font-mono mt-0.5 shrink-0">&gt;</span>
+                            <p>Partnered closely with non-technical stakeholders and executive leadership to align
+                                automated technical roadmap milestones with overarching corporate growth strategies.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Systems Engineer Custom Deployment -->
+                <div
+                    class="xl:col-span-2 bg-white border-4 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="bg-black text-white font-mono text-xs px-4 py-2 border-b-4 border-black font-bold flex justify-between items-center">
+                            <span class="text-[#A8E6CF]">ROLE: SYSTEMS ENGINEER CONSULTANT</span>
+                            <span class="bg-neutral-700 px-2 py-0.5 text-[10px]">HISTORICAL_DEPLOYMENT</span>
+                        </div>
+                        <div
+                            class="bg-neutral-900 text-white font-mono text-xs px-4 py-1 border-b-2 border-black font-bold">
+                            ORGANIZATION: ADEPT IMPEX
+                        </div>
+                        <div class="p-5 font-sans text-sm font-bold text-neutral-800 flex flex-col gap-3">
+                            <p
+                                class="bg-[#A8E6CF] p-3 border-2 border-black text-xs font-mono font-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                STATUS: AWARDED CERTIFICATE OF EXCELLENCE IN SYSTEMS ENGINEERING
+                            </p>
+                            <div class="flex gap-2 items-start mt-1">
+                                <span class="text-black font-black font-mono mt-0.5 shrink-0">&gt;</span>
+                                <p>Engineered a custom Enterprise Resource Management (ERM) system that optimized
+                                    resource allocation and parameters configuration profiles.</p>
+                            </div>
+                            <div class="flex gap-2 items-start">
+                                <span class="text-black font-black font-mono mt-0.5 shrink-0">&gt;</span>
+                                <p>Digitized deeply legacy manual inventory workflows across service networks to
+                                    accelerate strict data-driven corporate decision matrices.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-neutral-50 p-4 border-t-2 border-black text-xs font-mono font-bold text-neutral-500">
+                        // PROTOCOL_METRIC: Lean Six Sigma frameworks applied to systematically isolate and destroy
+                        execution bottlenecks.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEM NODE 03: CASING SYSTEM DEPLOYMENTS & REAL-WORLD PROJECTS -->
+        <section id="section-deployments" class="flex flex-col gap-4">
+            <h2
+                class="heading-font text-xl font-black uppercase bg-black text-white px-4 py-2 inline-block self-start tracking-tight border-4 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                // PRODUCTION_SYSTEM_DEPLOYMENTS
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Deployment Frame Alpha: 15CR Manufacturing -->
+                <div class="bg-white border-4 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+                    <div
+                        class="bg-black text-white p-3 font-mono text-xs font-bold border-b-4 border-black flex justify-between items-center">
+                        <span class="text-[#FFE600] uppercase tracking-wider">[ PIPELINE ALPHA // INVENTORY OPTIMIZATION
+                            ]</span>
+                        <span>04/2024 - 11/2025</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="heading-font font-black text-xl text-black mb-1 uppercase">Automated AI Inventory
+                            Tracking System</h3>
+                        <span class="text-[11px] font-mono font-black text-red-600 block mb-3">// ENVIRONMENT CORE: 15
+                            CRORE ANNUAL TURNOVER FACILITY</span>
+
+                        <p
+                            class="font-sans text-xs font-bold text-neutral-700 leading-relaxed bg-neutral-50 border-2 border-black p-3 mb-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            Architected and deployed a containerized system to sync heavy industrial warehouse material
+                            movements securely with active databases.
+                        </p>
+
+                        <div class="space-y-2 text-xs font-bold font-sans text-neutral-800 mb-4 flex-1">
+                            <div class="flex gap-2"><span class="font-mono text-black">&bull;</span>
+                                <p>Built automated data pipelines using Docker, n8n, and Python synced via custom Google
+                                    Apps Script workflows.</p>
+                            </div>
+                            <div class="flex gap-2"><span class="font-mono text-black">&bull;</span>
+                                <p>Integrated large language models using Ollama and OpenRouter to process, classify,
+                                    and audit physical raw records automatically.</p>
+                            </div>
+                            <div class="flex gap-2"><span class="font-mono text-black">&bull;</span>
+                                <p>Secured data sync channels and remote access tunnels using encrypted Cloudflare proxy
+                                    network architectures.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-[#A8E6CF] border-2 border-black p-3 font-mono text-xs font-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] mt-auto">
+                            SUCCESS_METRIC: Attained formal quality & configuration certification from a prominent
+                            European Compliance Board.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deployment Frame Beta: 25CR Financial Systems -->
+                <div class="bg-white border-4 border-black shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+                    <div
+                        class="bg-black text-white p-3 font-mono text-xs font-bold border-b-4 border-black flex justify-between items-center">
+                        <span class="text-[#FFB7B2] uppercase tracking-wider">[ PIPELINE BETA // FINANCIAL ARCHITECTURE
+                            ]</span>
+                        <span>06/2025 - 10/2025</span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="heading-font font-black text-xl text-black mb-1 uppercase">AI Integrated Asset
+                            Management Automation</h3>
+                        <span class="text-[11px] font-mono font-black text-blue-600 block mb-3">// DEPLOYED CONTEXT: 25
+                            CRORE AUM INVESTMENT CONGRUENT</span>
+
+                        <p
+                            class="font-sans text-xs font-bold text-neutral-700 leading-relaxed bg-neutral-50 border-2 border-black p-3 mb-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            Collaborated with specialized investment portfolios to engineer a zero-dependency automated
+                            evaluation framework for high-risk assets.
+                        </p>
+
+                        <div class="space-y-2 text-xs font-bold font-sans text-neutral-800 mb-4 flex-1">
+                            <div class="flex gap-2"><span class="font-mono text-black">&bull;</span>
+                                <p>Engineered automated operational rules and classification workflows to identify and
+                                    monitor Non-Performing Assets (NPAs).</p>
+                            </div>
+                            <div class="flex gap-2"><span class="font-mono text-black">&bull;</span>
+                                <p>Eliminated manual tracking dependencies, accelerating critical asset review
+                                    processing cycles.</p>
+                            </div>
+                            <div class="flex gap-2"><span class="font-mono text-black">&bull;</span>
+                                <p>Developed an end-to-end client lifecycle pipeline covering automated onboarding, KYC
+                                    processing, and long-term retention tracking parameters.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-[#FFB7B2] border-2 border-black p-3 font-mono text-xs font-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] mt-auto">
+                            SUCCESS_METRIC: Minimized admin errors down to nominal boundaries across critical client
+                            ingestion check-points.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEM NODE 04: GRANULAR TECHNICAL CAPABILITIES MATRIX -->
+        <section id="section-capabilities" class="flex flex-col gap-4">
+            <h2
+                class="heading-font text-xl font-black uppercase bg-black text-white px-4 py-2 inline-block self-start tracking-tight border-4 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                // STRUCTURAL_CAPABILITIES_MATRIX
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+                <!-- Stack Track 1 -->
+                <div class="bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+                    <div
+                        class="bg-black text-white p-2.5 font-black uppercase tracking-wider text-[#FFE600] border-b-2 border-black">
+                        [01] AI & AUTOMATION ENGINEERING
+                    </div>
+                    <div
+                        class="p-4 flex-1 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:12px_12px] bg-white/40">
+                        <div class="flex flex-wrap gap-2 font-bold">
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Generative
+                                AI</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Agentic
+                                AI</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Multi-Agent
+                                Workflows</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">n8n
+                                Execution</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Dify
+                                Core</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Ollama
+                                Local</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Langgraph</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stack Track 2 -->
+                <div class="bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+                    <div
+                        class="bg-black text-white p-2.5 font-black uppercase tracking-wider text-[#A8E6CF] border-b-2 border-black">
+                        [02] INFRASTRUCTURE & DEVOPS
+                    </div>
+                    <div
+                        class="p-4 flex-1 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:12px_12px] bg-white/40">
+                        <div class="flex flex-wrap gap-2 font-bold">
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Docker
+                                Systems</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Docker
+                                Compose</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">WSL2
+                                Environment</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Ubuntu
+                                Server CLI</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Cloudflare
+                                Tunnels</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Python
+                                Dev</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Google
+                                Apps Script</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stack Track 3 -->
+                <div class="bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+                    <div
+                        class="bg-black text-white p-2.5 font-black uppercase tracking-wider text-[#FFB7B2] border-b-2 border-black">
+                        [03] DATA ANALYTICS & OPERATIONS
+                    </div>
+                    <div
+                        class="p-4 flex-1 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:12px_12px] bg-white/40">
+                        <div class="flex flex-wrap gap-2 font-bold">
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Lean
+                                Six Sigma</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Process
+                                Mapping</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Business
+                                Analytics</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Tableau
+                                Dashboards</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Power
+                                BI Matrix</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Minitab
+                                Stat</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Appsmith
+                                UI</span>
+                            <span
+                                class="bg-white border-2 border-black px-2 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">Metabase
+                                Core</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LIVE EVENT TELEMETRY ROUTER CONSOLE CONTAINER -->
+        <section class="bg-black border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <div
+                class="bg-[#FFE600] text-black px-4 py-2 flex justify-between items-center font-mono text-xs font-black border-b-4 border-black">
+                <span class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 bg-red-600 border border-black animate-ping rounded-full"></span>
+                    LOG_STREAM: CORE_ENGINE_INGESTION_ROUTER.SH
+                </span>
+                <span class="bg-black text-white px-2 py-0.5 text-[10px]">ROUTING: MONITOR_ONLINE</span>
+            </div>
+            <div class="p-4 bg-black font-mono text-xs text-emerald-400 h-44 overflow-y-auto flex flex-col gap-1"
+                id="live-router-stream">
+                <!-- Javascript will continue streaming real operational logs derived from actual resume parameters here -->
+            </div>
+        </section>
+
+        <!-- SYSTEM NODE 05: VALIDATION LAYERS & ACADEMICS COMPLIANCE -->
+        <section id="section-validation" class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+            <!-- Column Block Alpha: Professional Certification Matrices -->
+            <div class="flex flex-col gap-4">
+                <h3
+                    class="heading-font text-lg font-black uppercase bg-black text-white px-3 py-1.5 inline-block self-start border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    // CREDENTIAL_VALIDATION_KEYS
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Cert 1 -->
+                    <div class="bg-white border-4 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                        <span
+                            class="text-[11px] font-mono font-black text-red-600 block border-b-2 border-black pb-1 mb-2">[
+                            CORE // CLSSBB ]</span>
+                        <h4 class="font-bold text-xs uppercase text-black font-mono">
+                            <a href="https://drive.google.com/file/d/1eWCOg6ROOXzvDglmuM6wYNV_oV2bufnG/view"
+                                target="_blank" class="hover:text-red-600 inline-flex items-center gap-1">
+                                Certified Lean Six Sigma Black Belt
+                                <svg class="w-3.5 h-3.5 text-red-600 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </h4>
+                        <p class="text-[11px] text-neutral-600 mt-1 font-sans font-bold leading-tight">Advanced
+                            enterprise process transformations, multi-variant statistical analysis, and high-level
+                            bottlenecks audit mitigation.</p>
+                    </div>
+                    <!-- Cert 2 -->
+                    <div class="bg-white border-4 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                        <span
+                            class="text-[11px] font-mono font-black text-blue-600 block border-b-2 border-black pb-1 mb-2">[
+                            CORE // AI-GEN ]</span>
+                        <h4 class="font-bold text-xs uppercase text-black font-mono">
+                            <a href="https://drive.google.com/file/d/19e8N5Bn0kTuj5Tcmj6wt_dDPsTzbQvEv/view"
+                                target="_blank" class="hover:text-blue-600 inline-flex items-center gap-1">
+                                Artificial Intelligence Generalist
+                                <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </h4>
+                        <p class="text-[11px] text-neutral-600 mt-1 font-sans font-bold leading-tight">Comprehensive
+                            deep optimization across Generative AI execution trees, cognitive workflows, and multi-agent
+                            system loops.</p>
+                    </div>
+                    <!-- Cert 3 -->
+                    <div class="bg-white border-4 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                        <span
+                            class="text-[11px] font-mono font-black text-neutral-500 block border-b-2 border-black pb-1 mb-2">[
+                            ANCILLARY // CLSSGB ]</span>
+                        <h4 class="font-bold text-xs uppercase text-black font-mono">
+                            <a href="https://drive.google.com/file/d/1ykn59zSpJt-zJ0Hy8VfoF5iWBzuDbuba/view"
+                                target="_blank" class="hover:text-neutral-500 inline-flex items-center gap-1">
+                                Certified Lean Six Sigma Green Belt
+                                <svg class="w-3.5 h-3.5 text-neutral-500 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </h4>
+                        <p class="text-[11px] text-neutral-600 mt-1 font-sans font-bold leading-tight">Statistical
+                            root-cause analysis deployment, data-driven system mapping, and localized workflow defect
+                            reductions.</p>
+                    </div>
+                    <!-- Cert 4 -->
+                    <div class="bg-white border-4 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                        <span
+                            class="text-[11px] font-mono font-black text-emerald-700 block border-b-2 border-black pb-1 mb-2">[
+                            AUDIT // ADEPT_IMPEX ]</span>
+                        <h4 class="font-bold text-xs uppercase text-black font-mono">
+                            <a href="https://drive.google.com/file/d/196UXuYXSrp3mUFDz1keCpwK0cQ8IaEbF/view"
+                                target="_blank" class="hover:text-emerald-700 inline-flex items-center gap-1">
+                                Excellence in Systems Engineering
+                                <svg class="w-3.5 h-3.5 text-emerald-700 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </h4>
+                        <p class="text-[11px] text-neutral-600 mt-1 font-sans font-bold leading-tight">Awarded for
+                            complete configuration design of custom enterprise ERM systems, asset tracking layers, and
+                            resource management engines.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column Block Beta: Academic Tracks Registries -->
+            <div class="flex flex-col gap-4">
+                <h3
+                    class="heading-font text-lg font-black uppercase bg-black text-white px-3 py-1.5 inline-block self-start border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    // ACADEMIC_REGISTRY_NODES
+                </h3>
+
+                <div class="flex flex-col gap-3">
+                    <!-- Academic Block 1 -->
+                    <div
+                        class="bg-white border-4 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex justify-between items-start gap-4">
+                        <div class="font-mono">
+                            <h4 class="font-black text-xs uppercase text-black">Business Analytics with Gen & Agentic AI
+                            </h4>
+                            <span class="text-[11px] font-bold text-neutral-600 block">BITS Pilani, BITSoM // Mumbai,
+                                India</span>
+                        </div>
+                        <span class="bg-black text-white text-[9px] px-2 py-0.5 font-bold shrink-0">12/2025 -
+                            07/2026</span>
+                    </div>
+
+                    <!-- Academic Block 2 -->
+                    <div
+                        class="bg-white border-4 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex justify-between items-start gap-4">
+                        <div class="font-mono">
+                            <h4 class="font-black text-xs uppercase text-black">Master of Business Administration (MBA)
+                                in Marketing</h4>
+                            <span class="text-[11px] font-bold text-neutral-600 block">Mangalayatan University // Agra,
+                                India</span>
+                        </div>
+                        <span class="bg-red-600 text-white text-[9px] px-2 py-0.5 font-bold shrink-0">06/2026 -
+                            PRESENT</span>
+                    </div>
+
+                    <!-- Academic Block 3 -->
+                    <div
+                        class="bg-white border-4 border-black p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex justify-between items-start gap-4">
+                        <div class="font-mono">
+                            <h4 class="font-black text-xs uppercase text-black">Bachelor of Commerce (B.Com)</h4>
+                            <span class="text-[11px] font-bold text-neutral-600 block">Agra University // Agra,
+                                India</span>
+                        </div>
+                        <span class="bg-black text-white text-[9px] px-2 py-0.5 font-bold shrink-0">06/2024 -
+                            06/2026</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SYSTEM NODE 06: EXTRA-CURRICULAR LOGICAL MODULES -->
+        <footer class="bg-white border-4 border-black p-5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] mb-4">
+            <span
+                class="text-xs font-black text-white bg-black uppercase mb-4 block border-2 border-black p-2 px-4 self-start inline-block tracking-widest shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                // NON-SYSLOG BACKGROUND PARAMETERS & PERIPHERALS:
+            </span>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 font-mono text-xs">
+                <!-- Academic Course Equivalent Deep Dive -->
+                <div class="border-2 border-black p-3 bg-neutral-50">
+                    <span class="font-black text-red-600 block text-[10px] border-b border-black/20 pb-1 mb-2">//
+                        SPECIALIZED MUSIC DEGREE</span>
+                    <h4 class="font-black text-xs mb-1 uppercase">
+                        <a href="https://drive.google.com/file/d/1_6eS7T88icgNd9bhIx7UD_tsydAtjkDW/view" target="_blank"
+                            class="hover:text-red-600 inline-flex items-center gap-1">
+                            Sangeet Prabhakar (BA Equivalent)
+                            <svg class="w-3.5 h-3.5 text-red-600 shrink-0" fill="none" stroke="currentColor"
+                                stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </h4>
+                    <span class="text-[10px] font-bold block text-neutral-500 mb-2">Prayag Sangeet Samiti, Prayagraj
+                        [1ST DIV DISTINCTION]</span>
+                    <p class="font-sans font-bold text-[11px] text-neutral-700 leading-normal">Awarded a 6-year
+                        professional degree with First Division distinction, specializing in Hindustani classical
+                        performance,
+                        advanced music theory, and composition.</p>
+                </div>
+
+                <!-- Technical Advanced Engineering Courses -->
+                <div class="border-2 border-black p-3 bg-neutral-50 flex flex-col gap-2">
+                    <span class="font-black text-blue-600 block text-[10px] border-b border-black/20 pb-1 mb-1">//
+                        CONTINUOUS TECHNICAL AUDITS</span>
+                    <div>
+                        <h5 class="font-black text-[11px] uppercase text-black">
+                            <a href="https://udemy-certificate.s3.amazonaws.com/image/UC-043ef0ee-32eb-4a90-b02e-31cfaca2f038.jpg"
+                                target="_blank" class="hover:text-blue-600 inline-flex items-center gap-1">
+                                Docker Mastery: with Kubernetes + Swarm
+                                <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </h5>
+                        <p class="font-sans font-bold text-[10px] text-neutral-600">Engineered multi-container
+                            environments, optimized YAML configurations, and secured data persistence frameworks.</p>
+                    </div>
+                    <div class="border-t border-black/10 pt-2">
+                        <h5 class="font-black text-[11px] uppercase text-black">
+                            <a href="https://udemy-certificate.s3.amazonaws.com/image/UC-5442be75-e824-4821-ae00-16fef3862bbf.jpg"
+                                target="_blank" class="hover:text-blue-600 inline-flex items-center gap-1">
+                                Mastering Linux CLI Operations
+                                <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </h5>
+                        <p class="font-sans font-bold text-[10px] text-neutral-600">Advanced shell script workflows,
+                            background process states tracking, network routing sockets manipulation, and logging tools.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Personal Core Track Vectors -->
+                <div class="border-2 border-black p-3 bg-neutral-50 flex flex-col gap-3">
+                    <span class="font-black text-emerald-700 block text-[10px] border-b border-black/20 pb-1">//
+                        PERSONAL INTEREST MATRICES</span>
+                    <div>
+                        <h5 class="font-black text-xs uppercase">[ Music Production & DJing ]</h5>
+                        <p class="font-sans font-bold text-[11px] text-neutral-600">Vocal performance systems, live
+                            studio audio mixing, track sequencing, and sonic frequencies analysis.</p>
+                    </div>
+                    <div>
+                        <h5 class="font-black text-xs uppercase">[ Endurance Motorsports & Rallying ]</h5>
+                        <p class="font-sans font-bold text-[11px] text-neutral-600">Bike and car cross-country rally
+                            competition, tactical route execution, and high-altitude wilderness navigation.</p>
+                    </div>
+                    <div
+                        class="mt-auto border-t border-black/20 pt-1.5 flex justify-between items-center text-[10px] font-black">
+                        <span>LANGUAGES CORE:</span>
+                        <span class="text-black bg-[#FFE600] px-1 border border-black">ENGLISH</span>
+                        <span class="text-black bg-[#A8E6CF] px-1 border border-black">HINDI</span>
+                        <span class="text-black bg-[#FFB7B2] px-1 border border-black">BENGALI</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- ==================== INTERACTIVE MODAL MODAL TERMINAL ENGINE ==================== -->
+    <div id="modal-terminal"
+        class="hidden fixed inset-0 bg-black/75 backdrop-blur-none z-50 flex items-center justify-center p-4">
+        <div
+            class="bg-white border-4 border-black w-full max-w-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <div
+                class="bg-black text-white p-3 font-bold text-sm flex justify-between items-center border-b-4 border-black">
+                <span class="heading-font font-black tracking-wider text-[#FFE600]">&gt; INITIATE_ENGAGEMENT.SH</span>
+                <button id="close-terminal"
+                    class="bg-[#FFB7B2] text-black border-2 border-black px-3 py-0.5 font-black text-xs hover:bg-white cursor-pointer">X</button>
+            </div>
+            <div class="bg-black text-emerald-400 p-4 font-mono text-xs h-56 overflow-y-auto flex flex-col gap-1.5"
+                id="terminal-log">
+                <div>[SYS] Industrial data parsing framework execution complete...</div>
+                <div>[SYS] Active Target Identification Checked: ANUBHAV SIKDAR CORE ENGINE</div>
+                <div>[SYS] Inbound channels unlocked. Awaiting message schema arrays...</div>
+            </div>
+            <div class="p-3 border-t-4 border-black bg-[#F4F0EA] flex gap-2">
+                <span class="font-black text-base self-center">&gt;</span>
+                <input type="text" id="terminal-input"
+                    placeholder="Type 'status', 'help', or pipe your proposal stream details here..."
+                    class="flex-1 bg-white border-2 border-black p-3 text-xs font-bold outline-none focus:bg-[#FFE600] text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ARCHITECTURE SYSTEM TOPOLOGY MODAL DIAGRAM ==================== -->
+    <div id="modal-arch"
+        class="hidden fixed inset-0 bg-black/75 backdrop-blur-none z-50 flex items-center justify-center p-4">
+        <div class="bg-white border-4 border-black w-full max-w-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div
+                class="bg-black text-[#FFE600] p-4 font-bold text-sm flex justify-between items-center border-b-4 border-black">
+                <span class="heading-font font-black tracking-wider">// CORE_INFRASTRUCTURE_ARCHITECTURE_TOPOLOGY</span>
+                <button id="close-arch"
+                    class="bg-white text-black border-2 border-black px-3 py-0.5 font-black text-xs hover:bg-[#FFB7B2] cursor-pointer">X</button>
+            </div>
+            <div class="p-6 bg-white overflow-x-auto">
+                <pre class="font-mono text-xs text-black font-black leading-relaxed">
++-------------------------------------------------------------+
+|               [ CLIENT USER INQUIRY ENTRY ]                 |
++-------------------------------------------------------------+
+                               |
+                               v
++-------------------------------------------------------------+
+|  [ INBOUND FILTER LAYER ] -> 100% Local Multi-Agent Core    |
+|   - Livekit Voice Layer / n8n Routing Router / Dify Engine  |
+|   - Intent Classifier Intent Rules (Filter Spam vs Business)|
++-------------------------------------------------------------+
+                               |
+                               v
++-------------------------------------------------------------+
+|  [ VECTOR STORAGE ARRAY ] -> Qdrant Semantic Database Array |
+|   - Real-Time Collection Memory / High Density Vector Logs  |
++-------------------------------------------------------------+
+                               |
+                               v
++-------------------------------------------------------------+
+|  [ ENGINE HOSTING PLATFORM ] -> Docker Isolated Container   |
+|   - Persistent Volume Allocations / Ubuntu Host Layer       |
++-------------------------------------------------------------+
+                </pre>
+                <div
+                    class="mt-4 bg-[#FFE600] border-4 border-black p-3 text-center text-xs font-black tracking-widest shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                    STATUS: LINE LATENCY OPTIMIZED // SECURE LOCAL ISOLATION
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
